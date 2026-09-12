@@ -1,0 +1,30 @@
+# Simulation and Python
+build/
+results/*.xml
+results/*.log
+results/waves/
+__pycache__/
+*.pyc
+*.vcd
+*.wdb
+*.wlf
+
+# Vivado generated files
+.Xil/
+*.cache/
+*.runs/
+*.gen/
+ip_user_files/
+*.jou
+*.str
+*.dcp
+*.bit
+*.ltx
+*.xpr
+*.xci
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,26 @@
+# Private implementation and generated artifacts
+*.bit
+*.hwh
+*.xsa
+*.bin
+*.npy
+*.npz
+*.safetensors
+*.vcd
+*.wdb
+*.log
+
+# Model/tokenizer assets
+tokenizer*.json
+vocab.json
+
+# Notebook and Python cache
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,26 @@
+SIM ?= verilator
+TOPLEVEL_LANG := verilog
+
+PROJECT_ROOT := $(abspath \
+	$(dir $(lastword $(MAKEFILE_LIST)))/..)
+
+VERILOG_SOURCES := \
+	$(PROJECT_ROOT)/rtl/axis_fifo_reader.sv
+
+TOPLEVEL := axis_fifo_reader
+COCOTB_TEST_MODULES := test_axis_fifo_reader
+
+COMPILE_ARGS += --timing
+COMPILE_ARGS += -Wall
+COMPILE_ARGS += -Wno-fatal
+
+SIM_BUILD := \
+	$(PROJECT_ROOT)/build/s5_axis
+
+COCOTB_RESULTS_FILE := \
+	$(PROJECT_ROOT)/results/s5_axis.xml
+
+export PYTHONPATH := \
+	$(PROJECT_ROOT):$(PROJECT_ROOT)/tb:$(PYTHONPATH)
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

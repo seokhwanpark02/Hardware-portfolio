@@ -1,0 +1,33 @@
+# Verilator
+obj_dir/
+*.vcd
+*.fst
+*.log
+
+# Vivado
+*.xpr
+*.dcp
+*.bit
+*.ltx
+*.jou
+*.str
+*.pb
+*.wdb
+*.wdf
+*.xml
+*.html
+.Xil/
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+
+# Build and editor files
+build/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

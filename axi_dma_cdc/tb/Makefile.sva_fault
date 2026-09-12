@@ -1,0 +1,32 @@
+SIM ?= verilator
+TOPLEVEL_LANG := verilog
+
+PROJECT_ROOT := $(abspath \
+	$(dir $(lastword $(MAKEFILE_LIST)))/..)
+
+FAULT_ID ?= A1
+
+VERILOG_SOURCES := \
+	$(PROJECT_ROOT)/rtl/dma_sva.sv \
+	$(PROJECT_ROOT)/tb/dma_sva_fault_top.sv
+
+TOPLEVEL := dma_sva_fault_top
+COCOTB_TEST_MODULES := test_sva_fault
+
+COMPILE_ARGS += --timing
+COMPILE_ARGS += --assert
+COMPILE_ARGS += -Wall
+COMPILE_ARGS += -Wno-fatal
+
+SIM_BUILD := \
+	$(PROJECT_ROOT)/build/s6_sva_fault
+
+COCOTB_RESULTS_FILE := \
+	$(PROJECT_ROOT)/results/s6_sva_fault_$(FAULT_ID).xml
+
+export FAULT_ID
+export PYTHONPATH := \
+	$(PROJECT_ROOT):$(PROJECT_ROOT)/tb:$(PYTHONPATH)
+
+include $(shell cocotb-config --makefiles)/Makefile.sim
+
