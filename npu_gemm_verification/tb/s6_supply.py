@@ -7,11 +7,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
 
-ROOT = Path(__file__).resolve().parents[2]
-S4_DIR = ROOT / "work_windows" / "s4_verify"
-S5_DIR = ROOT / "work_windows" / "s5_metrics"
-sys.path.insert(0, str(S4_DIR))
-sys.path.insert(0, str(S5_DIR))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from test_mm_ultra import (  # noqa: E402
     A_SIZE,
