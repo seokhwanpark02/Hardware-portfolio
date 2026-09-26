@@ -1,7 +1,6 @@
 # AXI4 Read DMA with Clock-Domain Crossing
 
 서로 다른 클록으로 동작하는 메모리 영역과 가속기 영역 사이에서 데이터를 안전하게 전달하는 AXI4 Read DMA 설계·검증 프로젝트입니다.
-\
 
 ## Key Results
 
@@ -47,7 +46,7 @@ flowchart LR
 
 발행할 burst는 행의 남은 길이, 4 KB boundary, 설정된 최대 burst, FIFO 수용 가능 공간을 함께 고려했습니다. 이미 발행한 burst를 안전하게 수용할 수 없으면 새 요청을 축소하거나 대기합니다.
 
-전체 주소·burst planning RTL은 공개 범위에서 제외했으며, 공개된 `axi_read_master.sv`에서 요청 수락, AXI AR/R handshake, `RRESP`/`RLAST` 검사와 FIFO write 경로를 확인할 수 있습니다.
+주소·burst planning RTL은 포함하지 않았으며, `axi_read_master.sv`에서 요청 수락, AXI AR/R handshake, `RRESP`/`RLAST` 검사와 FIFO write 경로를 확인할 수 있습니다.
 
 ### 2. CDC structure by signal type
 
@@ -84,7 +83,7 @@ FIFO32는 일부 balanced-clock 조건에서 FIFO16보다 최대 18.90% 높은 t
 | `rtl/reset_sync.sv` | Reset domain 처리 |
 | `rtl/dma_sva.sv` | 대표 protocol/safety assertions |
 
-전체 Top, AXI4-Lite CSR, 2D address/burst planner RTL은 공개하지 않습니다. 자세한 범위는 [Public Release Scope](PUBLIC_RELEASE_SCOPE.md)를 참고해 주세요.
+전체 Top, AXI4-Lite CSR, 2D address/burst planner RTL은 공개하지 않습니다. 자세한 내용은 [Repository Contents](PUBLIC_RELEASE_SCOPE.md)를 참고해 주세요.
 
 ## Published Verification Code
 
@@ -95,7 +94,7 @@ FIFO32는 일부 balanced-clock 조건에서 FIFO16보다 최대 18.90% 높은 t
 | `tb/test_s6_random.py` | 랜덤 회귀: 주소·행 길이·stride·tile 높이·MAX_BURST, ARREADY stall, RVALID gap, TREADY back-pressure를 seed로 생성하고 레퍼런스 기대값과 대조 |
 | `tb/Makefile.s6_random`, `scripts/run_s6_random_regression.sh` | 클럭 조합 × FIFO 깊이 × seed 회귀 실행 |
 
-랜덤 회귀는 비공개 RTL(top, CSR, planner)이 있어야 실행됩니다. 공개본에서는 **무엇을 어떤 기준으로 검사했는지**를 코드로 확인하는 용도입니다.
+랜덤 회귀는 이 저장소에 없는 RTL(top, CSR, planner)이 있어야 실행됩니다. 무엇을 어떤 기준으로 검사했는지 코드로 확인하는 용도입니다.
 
 ## Representative Tests
 
@@ -134,3 +133,4 @@ make -f tb/Makefile.sva_fault FAULT_ID=A1
 - Power values are vectorless estimates, not board measurements
 - FIFO16의 양의 timing margin은 100 MHz 목표 통과를 의미하며 더 높은 Fmax를 주장하지 않음
 
+No license is granted. All rights reserved.

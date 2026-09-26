@@ -1,6 +1,8 @@
-# Zynq PS–PL INT16 GEMM Portfolio
+# Zynq PS–PL INT16 GEMM Integration
 
-이 폴더는 `0601_gptneo_kv_int16.ipynb`에서 공개 가능한 내용만 추린 PS-side 포트폴리오 사본입니다.
+Zynq PS에서 8×8 INT16 GEMM 가속기를 구동하고, CPU INT16 quantized reference와 PL 결과를 비교한 기록입니다.
+
+기반 GEMM RTL: [Buck008/Transformer-Accelerator-Based-on-FPGA](https://github.com/Buck008/Transformer-Accelerator-Based-on-FPGA) (이 저장소에는 포함하지 않음)
 ## Architecture
 
 ```mermaid
@@ -22,7 +24,6 @@ flowchart LR
 - [축약 notebook](zynq_int16_ps_pl_verification.ipynb)
 - PS–PL 역할과 검증 경계
 - CPU INT16 quantized reference와 PL 결과의 정합성 수치
-- 기여 범위 및 upstream attribution
 
 ## Key Result
 
@@ -40,9 +41,9 @@ PL GEMM RTL 자체의 검증(scoreboard, fault injection, coverage, 성능 분�
 - Hardware correctness 기준은 CPU INT16 quantized reference입니다.
 - Float model과 quantized model 사이에는 accuracy drift가 확인됐습니다.
 - 상세 benchmark cell은 원본에서 실행되지 않았으므로 speedup·throughput 수치를 주장하지 않습니다.
-- 이 공개본은 구현 검토용이며 standalone 실행 패키지가 아닙니다.
+- standalone 실행 패키지가 아닙니다.
 
-## Withheld
+## Not Included
 
 - PL RTL and bitstream
 - DMA/MMIO implementation details
@@ -51,6 +52,4 @@ PL GEMM RTL 자체의 검증(scoreboard, fault injection, coverage, 성능 분�
 - model weights, tokenizer and vocabulary
 - raw generated text and token IDs
 
-출처와 역할 구분은 [UPSTREAM_ATTRIBUTION.md](UPSTREAM_ATTRIBUTION.md)를 참고하십시오.
-
-Portfolio review only. No open-source license is granted.
+No license is granted. All rights reserved.

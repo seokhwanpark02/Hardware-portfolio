@@ -3,14 +3,7 @@
 PYNQ(Zynq-7020)에서 GPT-Neo 추론을 가속하는 8×8 INT16 systolic GEMM 가속기의 **RTL 검증과 성능 원인 분석** 기록입니다.
 PS 측 통합과 보드 정합성 검증은 [zynq_ps_pl_gemm](../zynq_ps_pl_gemm/README.md)에 있습니다.
 
-## Scope
-
-| 단계 | 기간 | 내용 |
-|---|---|---|
-| 졸업작품 (3인) | 2026.02 ~ 06 | 공개 systolic RTL을 8×8 INT16으로 구성해 PS와 통합, 보드에서 CPU INT16 경로와 정합성 확인 |
-| 개인 재분석 | 2026.08 | cocotb 검증환경 구축, PE 이용률·stall 계측, prefetch RTL 수정과 회귀 |
-
-**기반 RTL 출처:** PL GEMM RTL은 [Buck008/Transformer-Accelerator-Based-on-FPGA](https://github.com/Buck008/Transformer-Accelerator-Based-on-FPGA)에서 출발했습니다. 해당 저장소에 라이선스가 명시돼 있지 않아 원본 RTL과 수정본은 이 폴더에 포함하지 않습니다. 여기에는 직접 작성한 검증 코드와 결과만 공개합니다.
+기반 GEMM RTL: [Buck008/Transformer-Accelerator-Based-on-FPGA](https://github.com/Buck008/Transformer-Accelerator-Based-on-FPGA) (이 저장소에는 포함하지 않음)
 
 ## Verification Environment
 
@@ -82,4 +75,4 @@ QKV (M=4 → 8 padding, K=64, N=192) 기준:
 - 실제 DDR 대역폭 · contention은 측정하지 않았습니다.
 - 공급률 실험은 testbench에서 TVALID duty를 조절한 것으로, 실제 메모리 대역폭 측정이 아닙니다.
 
-Portfolio review only. No open-source license is granted.
+No license is granted. All rights reserved.

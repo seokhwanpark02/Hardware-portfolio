@@ -1,17 +1,6 @@
 # 3×3 Distributed Multicore Image Filter — RTL Verification
 
 9개의 8-bit CPU가 인접 코어와 픽셀을 교환해 median filtering을 수행하고, 서로 다른 완료 시점을 barrier로 동기화하는 RTL입니다.
-
-
-## Project Scope
-
-| 단계 | 기간 | 인원 | 내용 |
-|---|---|---|---|
-| 원 과제 | 2025.03 ~ 06 | 4인 팀 (디지털 회로 설계 수업) | 3×3 멀티코어 구조, 코어 datapath, 코어 간 interface 설계 및 초기 검증 |
-| 재분석 | 2026.08 | 개인 | 재실행 시 드러난 RTL 오류 복구, 검증환경 재정비, coverage closure, 개선안 판단, 분석 자동화 |
-
-아래 결과는 모두 **개인 재분석 단계**의 결과입니다.
-
 ## Architecture
 
 ```mermaid
@@ -43,9 +32,9 @@ flowchart LR
 | 완료 시점 | Core 1 barrier SVA: 조기 완료 금지, 전원 완료 시 발생, reset 후 해제, 완료 신호 값 범위 | PASS, 조기 완료 fault injection 검출 |
 | 검증 범위 | 코어 위치 · 입력 패턴 · median 연산 조건별 20-bin functional coverage | random 20 vectors 17/20 → directed 10 vectors 추가 후 20/20 |
 
-### RTL 오류 복구 (재분석)
+### RTL 오류 복구
 
-재실행에서 출력 불일치가 드러나, 원인을 세 계층으로 분류해 수정했습니다.
+출력 불일치의 원인을 세 계층으로 분류해 수정했습니다.
 
 | 계층 | 내용 |
 |---|---|
@@ -60,7 +49,7 @@ flowchart LR
 
 ### 분석 자동화
 
-명령 한 번으로 Verilator 회귀 · SVA · coverage와 Vivado 합성 · 배치배선 · STA를 연속 실행하고, Python으로 로그 · 리포트 · 파형을 집계해 요약 보고서를 생성합니다. RTL을 수정할 때마다 기능과 타이밍을 같은 기준으로 다시 확인하기 위해 만들었습니다. (자동화 스크립트는 비공개)
+명령 한 번으로 Verilator 회귀 · SVA · coverage와 Vivado 합성 · 배치배선 · STA를 연속 실행하고, Python으로 로그 · 리포트 · 파형을 집계해 요약 보고서를 생성합니다. RTL을 수정할 때마다 기능과 타이밍을 같은 기준으로 다시 확인하기 위해 만들었습니다. (자동화 스크립트는 포함하지 않음)
 
 ## Published Files
 
@@ -72,7 +61,7 @@ flowchart LR
 | `verification/system_top_tb.cpp` | driver, monitor, scoreboard, mismatch 집계, timeout, functional coverage |
 | `verification/vectors.txt` | 30개 transaction (270개 출력) |
 
-Core 2–4, 6–9 내부 RTL과 일부 interface는 공개하지 않으므로 이 공개본만으로는 빌드되지 않습니다. 자세한 범위는 [PUBLIC_RELEASE_SCOPE.md](PUBLIC_RELEASE_SCOPE.md)를 참고하십시오.
+Core 2–4, 6–9 내부 RTL과 일부 interface는 포함하지 않으므로 이 저장소만으로는 빌드되지 않습니다. 자세한 내용은 [Repository Contents](PUBLIC_RELEASE_SCOPE.md)를 참고하십시오.
 
 ## Limitations
 
@@ -82,4 +71,4 @@ Core 2–4, 6–9 내부 RTL과 일부 interface는 공개하지 않으므로 �
 
 ## Notice
 
-This repository is provided for portfolio review only. No license is granted for redistribution or commercial use.
+No license is granted. All rights reserved.

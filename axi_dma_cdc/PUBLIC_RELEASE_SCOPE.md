@@ -1,33 +1,20 @@
-# Public Release Scope
-
-This repository is a curated engineering-portfolio release, not a complete product or production-ready IP distribution.
+# Repository Contents
 
 ## Included
 
-- Selected RTL modules written for this project
-- Representative cocotb module tests
+- AXI4 read master, Gray-pointer async FIFO, AXI4-Stream reader, CDC synchronizers and reset synchronizer RTL
+- SystemVerilog assertions and fault-injection harness
 - Independent Python reference model and its unit tests
 - Random-regression test and run script
-- Representative SystemVerilog Assertions and fault-injection harness
-- Sanitized clock constraints
-- Verification, performance and post-route result summaries
-- FIFO/Burst A/B metric table
+- Module-level cocotb tests
+- Clock constraints
+- Verification, timing and FIFO/Burst A/B result summaries
 
-## Intentionally Excluded
+## Not Included
 
-- Complete integration top
-- AXI4-Lite CSR implementation
-- 2D address and burst-planning implementation
+- Integration top, AXI4-Lite CSR and 2D address/burst-planner RTL
 - Directed end-to-end, A/B and stress testbenches
-- Generated Vivado projects, checkpoints, bitstreams and raw reports
-- Large waveforms, build products, caches and execution logs
-- Local paths and machine-specific configuration
-- Third-party or course-provided material without clear redistribution rights
+- Vivado projects, checkpoints, bitstreams and raw reports
+- Waveforms, build outputs and execution logs
 
-The excluded components are described at architecture and result level so the design process can be evaluated without publishing the complete implementation.
-
-## Rights and Use
-
-No open-source license is granted with this portfolio subset. The material is published for technical review and portfolio evaluation. GitHub's platform terms may still permit platform features such as viewing and forking.
-
-Only material for which the repository owner has publication rights should be uploaded. Review every file before making the repository public.
+No license is granted. All rights reserved.

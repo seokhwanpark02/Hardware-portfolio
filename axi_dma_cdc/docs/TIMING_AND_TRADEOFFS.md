@@ -26,7 +26,7 @@ Burst planning과 요청 수락·상태 갱신 사이의 조합 경로를 분석
 
 변경 전후 동일 seed와 A/B workload를 다시 실행했으며 측정된 cycle-level A/B 결과는 동일했습니다.
 
-구체적인 address/burst-planning RTL과 내부 signal-level critical-path 구현은 선별 공개 범위에서 제외했습니다.
+구체적인 address/burst-planning RTL과 내부 signal-level critical-path 구현은 이 저장소에 포함하지 않았습니다.
 
 ## FIFO16 versus FIFO32
 
