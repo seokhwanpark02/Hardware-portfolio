@@ -39,7 +39,8 @@
 - AXI RVALID gaps
 - AXI4-Stream TREADY back-pressure
 - FIFO depth 16 and 32
-- MEM100/ACC100, MEM100/ACC83 and MEM100/ACC33 clock conditions
+- Clock conditions: MEM100/ACC83, MEM100/ACC33 (MEM100/ACC100은 FIFO/Burst A/B 실험 조건)
+- 구성: 2 clock 조합 × FIFO16/32 × 30 seeds = 120 runs
 - 4 KB boundary and row-tail cases
 
 동일 seed 집합은 timing 개선 전후에 반복하여 기능적 회귀가 없는지 비교했습니다.

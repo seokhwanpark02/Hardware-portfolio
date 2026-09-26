@@ -11,7 +11,7 @@
 | 데이터 경로 | AXI4 Read → Async FIFO → AXI4-Stream |
 | 제어 경로 | AXI4-Lite CSR |
 | Clock domains | 100 MHz / 약 83 MHz, asynchronous |
-| Random regression | 120/120 PASS |
+| Random regression | 120/120 PASS (100/83·100/33 MHz × FIFO16/32 × 30 seeds) |
 | SVA fault injection | 5/5 detected |
 | Long back-pressure | 500 cycles PASS |
 | FIFO/Burst A/B matrix | 24/24 PASS |
@@ -85,7 +85,18 @@ FIFO32는 일부 balanced-clock 조건에서 FIFO16보다 최대 18.90% 높은 t
 | `rtl/reset_sync.sv` | Reset domain 처리 |
 | `rtl/dma_sva.sv` | 대표 protocol/safety assertions |
 
-전체 Top, AXI4-Lite CSR, 2D address/burst planner와 전체 regression infrastructure는 공개하지 않습니다. 자세한 범위는 [Public Release Scope](PUBLIC_RELEASE_SCOPE.md)를 참고해 주세요.
+전체 Top, AXI4-Lite CSR, 2D address/burst planner RTL은 공개하지 않습니다. 자세한 범위는 [Public Release Scope](PUBLIC_RELEASE_SCOPE.md)를 참고해 주세요.
+
+## Published Verification Code
+
+| 파일 | 내용 |
+|---|---|
+| `model/reference_model.py` | RTL과 독립적으로 작성한 레퍼런스 모델: 설정 검증, 4 KB 경계 계산, burst 계획, FIFO 제한 수락, 기대 주소·데이터 생성 |
+| `model/test_reference_model.py` | 레퍼런스 모델 단위 테스트 (11/11 PASS) |
+| `tb/test_s6_random.py` | 랜덤 회귀: 주소·행 길이·stride·tile 높이·MAX_BURST, ARREADY stall, RVALID gap, TREADY back-pressure를 seed로 생성하고 레퍼런스 기대값과 대조 |
+| `tb/Makefile.s6_random`, `scripts/run_s6_random_regression.sh` | 클럭 조합 × FIFO 깊이 × seed 회귀 실행 |
+
+랜덤 회귀는 비공개 RTL(top, CSR, planner)이 있어야 실행됩니다. 공개본에서는 **무엇을 어떤 기준으로 검사했는지**를 코드로 확인하는 용도입니다.
 
 ## Representative Tests
 
@@ -120,6 +131,7 @@ make -f tb/Makefile.sva_fault FAULT_ID=A1
 - Out-of-context implementation
 - No physical board or DDR traffic test
 - No formal proof
+- CDC 제약: XDC는 두 clock의 비동기 관계만 선언합니다. Gray pointer 버스의 bit 간 skew를 제한하는 `set_max_delay -datapath_only` 제약과 정적 CDC 검사는 아직 적용하지 않았습니다(보완 예정).
 - Power values are vectorless estimates, not board measurements
 - FIFO16의 양의 timing margin은 100 MHz 목표 통과를 의미하며 더 높은 Fmax를 주장하지 않음
 

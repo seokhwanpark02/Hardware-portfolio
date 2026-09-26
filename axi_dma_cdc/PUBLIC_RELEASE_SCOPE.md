@@ -6,6 +6,8 @@ This repository is a curated engineering-portfolio release, not a complete produ
 
 - Selected RTL modules written for this project
 - Representative cocotb module tests
+- Independent Python reference model and its unit tests
+- Random-regression test and run script
 - Representative SystemVerilog Assertions and fault-injection harness
 - Sanitized clock constraints
 - Verification, performance and post-route result summaries
@@ -16,7 +18,7 @@ This repository is a curated engineering-portfolio release, not a complete produ
 - Complete integration top
 - AXI4-Lite CSR implementation
 - 2D address and burst-planning implementation
-- Full end-to-end testbench and regression infrastructure
+- Directed end-to-end, A/B and stress testbenches
 - Generated Vivado projects, checkpoints, bitstreams and raw reports
 - Large waveforms, build products, caches and execution logs
 - Local paths and machine-specific configuration

@@ -1,0 +1,38 @@
+SIM ?= verilator
+TOPLEVEL_LANG := verilog
+TOPLEVEL := MM_ultra_top
+MODULE := test_mm_ultra
+
+RTL_DIR := $(abspath ../rtl_core)
+
+VERILOG_SOURCES := \
+  $(RTL_DIR)/MM_ultra_top.v \
+  $(RTL_DIR)/MM_ultra_axi.v \
+  $(RTL_DIR)/MM_ultra.v \
+  $(RTL_DIR)/MM_in_buffer.v \
+  $(RTL_DIR)/MM_buffer.v \
+  $(RTL_DIR)/MM.v \
+  $(RTL_DIR)/PE_array.v \
+  $(RTL_DIR)/PE_line.v \
+  $(RTL_DIR)/PE.v \
+  $(RTL_DIR)/MM_out_buffer.v \
+  $(RTL_DIR)/AdderS.v \
+  $(RTL_DIR)/right_shifter.v
+
+# Exact 0531_int16.hwh configuration.
+COMPILE_ARGS += -Wno-fatal
+COMPILE_ARGS += -Garray_size=8
+COMPILE_ARGS += -Gdata_width=16
+COMPILE_ARGS += -Gshift_width=6
+COMPILE_ARGS += -GWeight_block_num=2500
+COMPILE_ARGS += -Gin_feature_Block_num=1000
+COMPILE_ARGS += -Gout_feature_block_num=1000
+COMPILE_ARGS += -Gout_mem_width=40
+COMPILE_ARGS += -Gfeature_length_width=10
+COMPILE_ARGS += -Gfeature_width_block_num_width=6
+COMPILE_ARGS += -Gweight_width_block_num_width=6
+
+SIM_BUILD ?= sim_build
+WAVES ?= 0
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

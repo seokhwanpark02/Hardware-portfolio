@@ -31,7 +31,9 @@ flowchart LR
 | Prefill: CPU quant vs PL | 6.4373e-6 | Yes | 10/10 |
 | Decode 1-step: CPU quant vs PL | 1.0490e-5 | Yes | 10/10 |
 
-20-token generation comparison에서도 CPU quantized path와 PL path가 같은 token sequence를 생성했습니다.
+Top-10 overlap은 상위 10개 후보 집합의 겹침이며, 순위 일치를 뜻하지 않습니다.
+
+PL GEMM RTL 자체의 검증(scoreboard, fault injection, coverage, 성능 분석)은 [npu_gemm_verification](../npu_gemm_verification/README.md)에 정리했습니다.
 
 ## Evidence Boundary
 

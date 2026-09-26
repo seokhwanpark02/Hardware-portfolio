@@ -1,0 +1,50 @@
+SIM ?= verilator
+TOPLEVEL_LANG := verilog
+
+PROJECT_ROOT := $(abspath \
+	$(dir $(lastword $(MAKEFILE_LIST)))/..)
+
+FIFO_DEPTH ?= 16
+TEST_SEED ?= 1
+CLOCK_TAG ?= C1
+CLK_ACC_NS ?= 10
+CLK_MEM_NS ?= 12
+
+VERILOG_SOURCES := \
+	$(PROJECT_ROOT)/rtl/reset_sync.sv \
+	$(PROJECT_ROOT)/rtl/toggle_pulse_cdc.sv \
+	$(PROJECT_ROOT)/rtl/level_sync_2ff.sv \
+	$(PROJECT_ROOT)/rtl/axi_lite_csr.sv \
+	$(PROJECT_ROOT)/rtl/dma_addr_gen.sv \
+	$(PROJECT_ROOT)/rtl/axi_read_master.sv \
+	$(PROJECT_ROOT)/rtl/async_fifo_gray.sv \
+	$(PROJECT_ROOT)/rtl/axis_fifo_reader.sv \
+	$(PROJECT_ROOT)/rtl/dma_sva.sv \
+	$(PROJECT_ROOT)/rtl/axi_dma_cdc_top.sv
+
+TOPLEVEL := axi_dma_cdc_top
+COCOTB_TEST_MODULES := test_s6_random
+
+COMPILE_ARGS += --timing
+COMPILE_ARGS += --assert
+COMPILE_ARGS += -DDMA_ENABLE_SVA
+COMPILE_ARGS += -Wall
+COMPILE_ARGS += -Wno-fatal
+COMPILE_ARGS += -GFIFO_DEPTH=$(FIFO_DEPTH)
+
+SIM_BUILD := \
+	$(PROJECT_ROOT)/build/s6_random_$(FIFO_DEPTH)
+
+COCOTB_RESULTS_FILE := \
+	$(PROJECT_ROOT)/results/s6_random_$(CLOCK_TAG)_f$(FIFO_DEPTH)_s$(TEST_SEED).xml
+
+export FIFO_DEPTH
+export TEST_SEED
+export CLOCK_TAG
+export CLK_ACC_NS
+export CLK_MEM_NS
+
+export PYTHONPATH := \
+	$(PROJECT_ROOT):$(PROJECT_ROOT)/tb:$(PYTHONPATH)
+
+include $(shell cocotb-config --makefiles)/Makefile.sim
