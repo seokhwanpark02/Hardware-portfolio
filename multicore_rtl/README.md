@@ -1,7 +1,7 @@
 # 3×3 Distributed Multicore Image Filter — RTL Verification
 
 9개의 8-bit CPU가 인접 코어와 픽셀을 교환해 median filtering을 수행하고, 서로 다른 완료 시점을 barrier로 동기화하는 RTL입니다.
-이 폴더는 채용 검토를 위한 **선별 공개본**이며 전체 구현을 공개하지 않습니다.
+
 
 ## Project Scope
 
